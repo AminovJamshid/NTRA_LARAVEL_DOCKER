@@ -2,9 +2,9 @@ name: Laravel
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   laravel-tests:
@@ -49,7 +49,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             set -e
-            cd NTRA_LARAVEL_DOCKER 
+            cd NTRA_LARAVEL_DOCKER
             git pull
             docker-compose -f docker-compose.production.yml up --build -d
             docker exec ntra_app php artisan optimize
