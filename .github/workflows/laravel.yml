@@ -8,7 +8,6 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -41,6 +40,12 @@ jobs:
     steps:
       - name: Echo secrets
         run: echo ${{ secrets.HOST }} ${{ secrets.USERNAME }}
+      - name: Check Docker Status
+        run: docker ps -a
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.1.0
         with:
@@ -52,5 +57,7 @@ jobs:
             set -e
             cd NTRA_LARAVEL_DOCKER
             git pull
+            docker-compose -f docker-compose.production.yml pull
             docker-compose -f docker-compose.production.yml up --build -d
             docker exec ntra_app php artisan optimize
+            docker logs ntra_app
