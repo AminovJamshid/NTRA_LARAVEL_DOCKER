@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory inside the container
 WORKDIR /var/www
 
+
 # Copy the Laravel application files into the container
 COPY . /var/www
 
