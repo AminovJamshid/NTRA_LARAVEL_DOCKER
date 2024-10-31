@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             set -e
-            cd online-store
+            cd NTRA_LARAVEL_DOCKER
             git reset --hard HEAD
             git pull
             docker compose -f docker-compose.production.yml up --build -d
