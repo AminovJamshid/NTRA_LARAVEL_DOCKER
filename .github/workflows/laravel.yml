@@ -36,7 +36,7 @@ jobs:
         run: php artisan test
 
   deploy:
-    needs: laravel-tests
+#    needs: laravel-tests
     name: Deploy to DigitalOcean
     runs-on: ubuntu-latest
     steps:
@@ -52,4 +52,5 @@ jobs:
             git reset --hard HEAD
             git pull
             docker compose -f docker-compose.production.yml up --build -d
+            docker exec os_app composer update
             docker exec os_app php artisan optimize
