@@ -51,7 +51,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             script: |
-                 cd NTRA_LARAVEL_DOCKER || exit 1
+                 cd NTRA_LARAVEL_DOCKER
                  git pull
                  docker-compose -f docker-compose.yml up -d --build
                  docker exec rent_app php artisan optimize
