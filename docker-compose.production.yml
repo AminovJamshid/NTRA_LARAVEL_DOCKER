@@ -12,15 +12,15 @@ services:
     networks:
       - app-network  # Connect to the custom network
 
-#  ntra_app:
-#    container_name: ntra_app
-#    build: .  # Build from the Dockerfile
-#    depends_on:
-#      - ntra_db
-#    volumes:
-#      - ./:/var/www  # Mount the Laravel application directory
-#    networks:
-#      - app-network  # Connect to the custom network
+  ntra_app:
+    container_name: ntra_app
+    build: .  # Build from the Dockerfile
+    depends_on:
+      - ntra_db
+    volumes:
+      - ./:/var/www  # Mount the Laravel application directory
+    networks:
+      - app-network  # Connect to the custom network
 
   ntra_db:
     container_name: ntra_db
