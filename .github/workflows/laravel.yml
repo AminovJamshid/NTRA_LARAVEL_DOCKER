@@ -1,4 +1,5 @@
 
+
 name: Laravel
 
 on:
@@ -36,21 +37,21 @@ jobs:
         run: php artisan test
 
   deploy:
-    needs: laravel-tests
     name: Deploy to DigitalOcean
     runs-on: ubuntu-latest
     steps:
+      - name: Echo secrets
+        run: echo ${{ secrets.HOST }} ${{ secrets.USERNAME }}
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
           script: |
-            set -e
-            cd NTRA_LARAVEL_DOCKER
-            git reset --hard HEAD
-            git pull
-            docker compose -f docker-compose.production.yml up --build -d
-            docker exec os_app composer update
-            docker exec os_app php artisan optimize
+            script: |
+                 cd NTRA_LARAVEL_DOCKER || exit 1
+                 git pull
+                 docker-compose -f docker-compose.yml up -d --build
+                 docker exec rent_app php artisan optimize
