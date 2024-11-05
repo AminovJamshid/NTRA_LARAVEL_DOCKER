@@ -37,6 +37,7 @@ jobs:
         run: php artisan test
 
   deploy:
+    needs: laravel-tests
     name: Deploy to DigitalOcean
     runs-on: ubuntu-latest
     steps:
