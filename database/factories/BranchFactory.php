@@ -17,9 +17,8 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name,
-            'address'=>fake()->randomElement(["Chilonzor", "Xadra", "Chimboy", "Xorazm", "Samarqand", "Farg'ona"]),
-            'image'=>storage_path("/images/default.jgp")
+            'name' => $this->faker->randomElement(['Samarqand', "Farg'ona", 'Xorazm', 'Chilonzor', 'Chimboy', 'Xadra']),
+            'address' => $this->faker->address(),
         ];
     }
 }
